@@ -3,13 +3,13 @@
   {
    "cell_type": "code",
    "execution_count": null,
-   "id": "3db4c47e",
+   "id": "9a7ca830",
    "metadata": {
     "papermill": {
-     "duration": 0.002577,
-     "end_time": "2026-05-19T21:36:15.413978+00:00",
+     "duration": 0.002782,
+     "end_time": "2026-05-19T21:57:48.617401+00:00",
      "exception": false,
-     "start_time": "2026-05-19T21:36:15.411401+00:00",
+     "start_time": "2026-05-19T21:57:48.614619+00:00",
      "status": "completed"
     },
     "tags": []
@@ -20,21 +20,21 @@
   {
    "cell_type": "code",
    "execution_count": 1,
-   "id": "fb7cfbd0",
+   "id": "b4171e93",
    "metadata": {
     "_cell_guid": "b1076dfc-b9ad-4769-8c92-a6c4dae69d19",
     "_uuid": "8f2839f25d086af736a60e9eeb907d3b93b6e0e5",
     "execution": {
-     "iopub.execute_input": "2026-05-19T21:36:15.418324Z",
-     "iopub.status.busy": "2026-05-19T21:36:15.418006Z",
-     "iopub.status.idle": "2026-05-19T21:36:25.710480Z",
-     "shell.execute_reply": "2026-05-19T21:36:25.709237Z"
+     "iopub.execute_input": "2026-05-19T21:57:48.623677Z",
+     "iopub.status.busy": "2026-05-19T21:57:48.623084Z",
+     "iopub.status.idle": "2026-05-19T21:58:09.461429Z",
+     "shell.execute_reply": "2026-05-19T21:58:09.459904Z"
     },
     "papermill": {
-     "duration": 10.297122,
-     "end_time": "2026-05-19T21:36:25.712511+00:00",
+     "duration": 20.844241,
+     "end_time": "2026-05-19T21:58:09.463665+00:00",
      "exception": false,
-     "start_time": "2026-05-19T21:36:15.415389+00:00",
+     "start_time": "2026-05-19T21:57:48.619424+00:00",
      "status": "completed"
     },
     "tags": []
@@ -44,16 +44,19 @@
      "name": "stdout",
      "output_type": "stream",
      "text": [
-      "Processing 6 files...\n",
-      " Skipping 000d7d20__typewell.csv: 'MD' column missing. Found columns: ['TVT', 'GR']\n",
-      " Skipping 00e12e8b__typewell.csv: 'MD' column missing. Found columns: ['TVT', 'GR']\n",
-      " Skipping 00bbac68__typewell.csv: 'MD' column missing. Found columns: ['TVT', 'GR']\n"
+      "Processing 6 files...\n"
      ]
     },
     {
      "name": "stderr",
      "output_type": "stream",
      "text": [
+      "/usr/local/lib/python3.12/dist-packages/sklearn/utils/validation.py:2732: UserWarning: X has feature names, but StandardScaler was fitted without feature names\n",
+      "  warnings.warn(\n",
+      "/usr/local/lib/python3.12/dist-packages/sklearn/utils/validation.py:2732: UserWarning: X has feature names, but StandardScaler was fitted without feature names\n",
+      "  warnings.warn(\n",
+      "/usr/local/lib/python3.12/dist-packages/sklearn/utils/validation.py:2732: UserWarning: X has feature names, but StandardScaler was fitted without feature names\n",
+      "  warnings.warn(\n",
       "/usr/local/lib/python3.12/dist-packages/sklearn/utils/validation.py:2732: UserWarning: X has feature names, but StandardScaler was fitted without feature names\n",
       "  warnings.warn(\n",
       "/usr/local/lib/python3.12/dist-packages/sklearn/utils/validation.py:2732: UserWarning: X has feature names, but StandardScaler was fitted without feature names\n",
@@ -66,7 +69,7 @@
      "name": "stdout",
      "output_type": "stream",
      "text": [
-      "Submission generated successfully.\n"
+      "Final submission rows: 14151\n"
      ]
     }
    ],
@@ -107,18 +110,19 @@
     "\n",
     "# 2. Setup\n",
     "device = torch.device(\"cuda\" if torch.cuda.is_available() else \"cpu\")\n",
-    "cnn_path = '/kaggle/input/notebooks/homeshwarrao/train-rogii-phase-2-1d-cnn/geology_wavenet_weights.pth'\n",
-    "lgbm_path = '/kaggle/input/notebooks/homeshwarrao/train-rogii-phase-1-2-lgbm-baseline/lgbm_v2_fold_{}.txt'\n",
-    "scaler = joblib.load('/kaggle/input/notebooks/homeshwarrao/train-rogii-phase-2-1d-cnn/scaler.pkl') # Load your saved scaler\n",
-    "lgbm_path = '/kaggle/input/notebooks/homeshwarrao/train-rogii-phase-1-2-lgbm-baseline/lgbm_enriched_fold_{}.txt'\n",
-    "# Load Models\n",
+    "scaler_path = glob.glob('/kaggle/input/**/scaler.pkl', recursive=True)[0]\n",
+    "cnn_path = glob.glob('/kaggle/input/**/geology_wavenet_weights.pth', recursive=True)[0]\n",
+    "lgbm_paths = glob.glob('/kaggle/input/**/lgbm_enriched_fold_*.txt', recursive=True)\n",
+    "\n",
+    "scaler = joblib.load(scaler_path)\n",
     "model_cnn = GeologyWaveNet(in_channels=5).to(device)\n",
     "model_cnn.load_state_dict(torch.load(cnn_path, map_location=device))\n",
     "model_cnn.eval()\n",
-    "lgb_models = [lgb.Booster(model_file=lgbm_path.format(i+1)) for i in range(5)]\n",
+    "lgb_models = [lgb.Booster(model_file=path) for path in sorted(lgbm_paths)]\n",
     "\n",
     "# 3. Inference Loop\n",
     "test_files = glob.glob('/kaggle/input/competitions/rogii-wellbore-geology-prediction/test/*.csv')\n",
+    "sample_sub = pd.read_csv('/kaggle/input/competitions/rogii-wellbore-geology-prediction/sample_submission.csv')\n",
     "submission_list = []\n",
     "\n",
     "print(f\"Processing {len(test_files)} files...\")\n",
@@ -126,29 +130,23 @@
     "for file in test_files:\n",
     "    df = pd.read_csv(file)\n",
     "    \n",
-    "    # --- Robustness Check ---\n",
-    "    # Check if 'MD' exists. If not, print the columns so you know what's in that specific file\n",
-    "    if 'MD' not in df.columns:\n",
-    "        print(f\" Skipping {os.path.basename(file)}: 'MD' column missing. Found columns: {list(df.columns)}\")\n",
-    "        continue\n",
-    "    \n",
-    "    # --- Feature Engineering (Must match Training exactly) ---\n",
+    "    # --- Critical: ID Handling ---\n",
+    "    # Check if 'id' exists in the test file. If yes, USE IT. \n",
+    "    # If not, we fall back to index, but this is likely why you have a mismatch.\n",
+    "    if 'id' not in df.columns:\n",
+    "        well_id = os.path.basename(file).split('__')[0]\n",
+    "        df['id'] = well_id + '_' + df.index.astype(str)\n",
+    "        \n",
+    "    # --- Feature Engineering ---\n",
+    "    if 'MD' not in df.columns: df['MD'] = np.arange(len(df))\n",
     "    df = df.sort_values('MD').reset_index(drop=True)\n",
     "    df['MD_diff'] = df['MD'].diff().fillna(0)\n",
-    "    \n",
-    "    # Check for X, Y, Z columns as well (sometimes these are missing too)\n",
     "    for col in ['X', 'Y', 'Z']:\n",
-    "        if col in df.columns:\n",
-    "            df[f'{col}_diff'] = df[col].diff().fillna(0)\n",
-    "        else:\n",
-    "            # If XYZ are missing, fill with 0 to prevent crashes\n",
-    "            df[f'{col}_diff'] = 0.0\n",
+    "        df[f'{col}_diff'] = df[col].diff().fillna(0) if col in df.columns else 0.0\n",
     "    \n",
-    "    # Ensure all features exist before selecting\n",
-    "    # (Update this list if some files don't have all these columns)\n",
     "    features = df[['GR', 'MD_diff', 'X_diff', 'Y_diff', 'Z_diff']]\n",
     "    \n",
-    "    # --- CNN Embedding Generation ---\n",
+    "    # --- CNN + LGBM Prediction ---\n",
     "    x_scaled = scaler.transform(features)\n",
     "    x_tensor = torch.tensor(x_scaled, dtype=torch.float32).unsqueeze(0).transpose(1, 2).to(device)\n",
     "    \n",
@@ -158,32 +156,48 @@
     "            emb = F.relu(conv(emb))\n",
     "        embedding = emb.mean(dim=2).cpu().numpy()\n",
     "        \n",
-    "    # --- Ensemble Prediction ---\n",
     "    combined_data = np.hstack([x_scaled, np.tile(embedding, (len(df), 1))])\n",
     "    preds = np.mean([m.predict(combined_data) for m in lgb_models], axis=0)\n",
     "    \n",
-    "    submission_rows = pd.DataFrame({'TVT': preds})\n",
+    "    # Save predictions with the actual 'id' column\n",
+    "    submission_rows = pd.DataFrame({'id': df['id'], 'tvt': preds})\n",
     "    submission_list.append(submission_rows)\n",
     "\n",
-    "# 4. Generate CSV\n",
-    "if submission_list:\n",
-    "    final_submission = pd.concat(submission_list, ignore_index=True)\n",
-    "    final_submission.to_csv('submission.csv', index=False)\n",
-    "    print(\"Submission generated successfully.\")\n",
-    "else:\n",
-    "    print(\"No files were processed successfully. Check your column names.\")"
+    "# 4. Final Merge (Fixed to handle duplicates)\n",
+    "all_preds = pd.concat(submission_list, ignore_index=True)\n",
+    "\n",
+    "# CRITICAL: Remove any duplicate IDs from your predictions before merging\n",
+    "all_preds = all_preds.drop_duplicates(subset=['id'], keep='first')\n",
+    "\n",
+    "# Now perform the merge. Since 'sample_sub' is the source of truth, \n",
+    "# this will result in exactly 14,151 rows.\n",
+    "final_submission = sample_sub[['id']].merge(all_preds, on='id', how='inner')\n",
+    "\n",
+    "# Final sanity check to fill missing values\n",
+    "final_submission['tvt'] = final_submission['tvt'].fillna(0)\n",
+    "\n",
+    "# Final Save\n",
+    "final_submission.to_csv('submission.csv', index=False)\n",
+    "print(f\"Final submission rows: {len(final_submission)}\")"
    ]
   },
   {
    "cell_type": "code",
    "execution_count": null,
-   "id": "75a8c74e",
+   "id": "34344bb2",
    "metadata": {
+    "execution": {
+     "iopub.execute_input": "2026-05-19T21:46:55.939794Z",
+     "iopub.status.busy": "2026-05-19T21:46:55.939027Z",
+     "iopub.status.idle": "2026-05-19T21:46:55.966236Z",
+     "shell.execute_reply": "2026-05-19T21:46:55.965103Z",
+     "shell.execute_reply.started": "2026-05-19T21:46:55.939757Z"
+    },
     "papermill": {
-     "duration": 0.001214,
-     "end_time": "2026-05-19T21:36:25.715441+00:00",
+     "duration": 0.002229,
+     "end_time": "2026-05-19T21:58:09.468319+00:00",
      "exception": false,
-     "start_time": "2026-05-19T21:36:25.714227+00:00",
+     "start_time": "2026-05-19T21:58:09.466090+00:00",
      "status": "completed"
     },
     "tags": []
@@ -194,13 +208,20 @@
   {
    "cell_type": "code",
    "execution_count": null,
-   "id": "11e4da90",
+   "id": "dce2c089",
    "metadata": {
+    "execution": {
+     "iopub.execute_input": "2026-05-19T21:47:35.951568Z",
+     "iopub.status.busy": "2026-05-19T21:47:35.951213Z",
+     "iopub.status.idle": "2026-05-19T21:47:35.976682Z",
+     "shell.execute_reply": "2026-05-19T21:47:35.975402Z",
+     "shell.execute_reply.started": "2026-05-19T21:47:35.951535Z"
+    },
     "papermill": {
-     "duration": 0.001647,
-     "end_time": "2026-05-19T21:36:25.718304+00:00",
+     "duration": 0.002042,
+     "end_time": "2026-05-19T21:58:09.472529+00:00",
      "exception": false,
-     "start_time": "2026-05-19T21:36:25.716657+00:00",
+     "start_time": "2026-05-19T21:58:09.470487+00:00",
      "status": "completed"
     },
     "tags": []
@@ -211,13 +232,61 @@
   {
    "cell_type": "code",
    "execution_count": null,
-   "id": "4a15659b",
+   "id": "851ec83d",
+   "metadata": {
+    "execution": {
+     "iopub.execute_input": "2026-05-19T21:48:06.394222Z",
+     "iopub.status.busy": "2026-05-19T21:48:06.393711Z",
+     "iopub.status.idle": "2026-05-19T21:48:06.399851Z",
+     "shell.execute_reply": "2026-05-19T21:48:06.398914Z",
+     "shell.execute_reply.started": "2026-05-19T21:48:06.394040Z"
+    },
+    "papermill": {
+     "duration": 0.00197,
+     "end_time": "2026-05-19T21:58:09.476635+00:00",
+     "exception": false,
+     "start_time": "2026-05-19T21:58:09.474665+00:00",
+     "status": "completed"
+    },
+    "tags": []
+   },
+   "outputs": [],
+   "source": []
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "3b26500b",
+   "metadata": {
+    "execution": {
+     "iopub.execute_input": "2026-05-19T21:48:27.933862Z",
+     "iopub.status.busy": "2026-05-19T21:48:27.933515Z",
+     "iopub.status.idle": "2026-05-19T21:48:27.977067Z",
+     "shell.execute_reply": "2026-05-19T21:48:27.976176Z",
+     "shell.execute_reply.started": "2026-05-19T21:48:27.933831Z"
+    },
+    "papermill": {
+     "duration": 0.001985,
+     "end_time": "2026-05-19T21:58:09.480700+00:00",
+     "exception": false,
+     "start_time": "2026-05-19T21:58:09.478715+00:00",
+     "status": "completed"
+    },
+    "tags": []
+   },
+   "outputs": [],
+   "source": []
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "9a356752",
    "metadata": {
     "papermill": {
-     "duration": 0.001377,
-     "end_time": "2026-05-19T21:36:25.721770+00:00",
+     "duration": 0.001967,
+     "end_time": "2026-05-19T21:58:09.484814+00:00",
      "exception": false,
-     "start_time": "2026-05-19T21:36:25.720393+00:00",
+     "start_time": "2026-05-19T21:58:09.482847+00:00",
      "status": "completed"
     },
     "tags": []
@@ -272,14 +341,14 @@
   },
   "papermill": {
    "default_parameters": {},
-   "duration": 14.40757,
-   "end_time": "2026-05-19T21:36:27.047013+00:00",
+   "duration": 26.553543,
+   "end_time": "2026-05-19T21:58:11.705433+00:00",
    "environment_variables": {},
    "exception": null,
    "input_path": "__notebook__.ipynb",
    "output_path": "__notebook__.ipynb",
    "parameters": {},
-   "start_time": "2026-05-19T21:36:12.639443+00:00",
+   "start_time": "2026-05-19T21:57:45.151890+00:00",
    "version": "2.7.0"
   }
  },
