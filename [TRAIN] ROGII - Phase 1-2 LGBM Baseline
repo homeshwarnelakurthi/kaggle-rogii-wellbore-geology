@@ -3,21 +3,21 @@
   {
    "cell_type": "code",
    "execution_count": 1,
-   "id": "782b5b44",
+   "id": "014b9343",
    "metadata": {
     "_cell_guid": "b1076dfc-b9ad-4769-8c92-a6c4dae69d19",
     "_uuid": "8f2839f25d086af736a60e9eeb907d3b93b6e0e5",
     "execution": {
-     "iopub.execute_input": "2026-05-19T19:44:51.777380Z",
-     "iopub.status.busy": "2026-05-19T19:44:51.776448Z",
-     "iopub.status.idle": "2026-05-19T19:44:53.036607Z",
-     "shell.execute_reply": "2026-05-19T19:44:53.035626Z"
+     "iopub.execute_input": "2026-05-19T20:59:39.201515Z",
+     "iopub.status.busy": "2026-05-19T20:59:39.201095Z",
+     "iopub.status.idle": "2026-05-19T20:59:40.294755Z",
+     "shell.execute_reply": "2026-05-19T20:59:40.293693Z"
     },
     "papermill": {
-     "duration": 1.267535,
-     "end_time": "2026-05-19T19:44:53.039009+00:00",
+     "duration": 1.100665,
+     "end_time": "2026-05-19T20:59:40.297022+00:00",
      "exception": false,
-     "start_time": "2026-05-19T19:44:51.771474+00:00",
+     "start_time": "2026-05-19T20:59:39.196357+00:00",
      "status": "completed"
     },
     "tags": []
@@ -113,19 +113,19 @@
   {
    "cell_type": "code",
    "execution_count": 2,
-   "id": "77a1fd1a",
+   "id": "1fa156c9",
    "metadata": {
     "execution": {
-     "iopub.execute_input": "2026-05-19T19:44:53.046708Z",
-     "iopub.status.busy": "2026-05-19T19:44:53.045590Z",
-     "iopub.status.idle": "2026-05-19T19:45:37.448141Z",
-     "shell.execute_reply": "2026-05-19T19:45:37.447001Z"
+     "iopub.execute_input": "2026-05-19T20:59:40.304047Z",
+     "iopub.status.busy": "2026-05-19T20:59:40.303647Z",
+     "iopub.status.idle": "2026-05-19T21:00:22.139130Z",
+     "shell.execute_reply": "2026-05-19T21:00:22.137974Z"
     },
     "papermill": {
-     "duration": 44.408844,
-     "end_time": "2026-05-19T19:45:37.450318+00:00",
+     "duration": 41.84162,
+     "end_time": "2026-05-19T21:00:22.141263+00:00",
      "exception": false,
-     "start_time": "2026-05-19T19:44:53.041474+00:00",
+     "start_time": "2026-05-19T20:59:40.299643+00:00",
      "status": "completed"
     },
     "tags": []
@@ -141,7 +141,7 @@
     {
      "data": {
       "application/vnd.jupyter.widget-view+json": {
-       "model_id": "06be5479119448ac9505ab6bdb607725",
+       "model_id": "4b120337a8ae42199fa9d196e017b04b",
        "version_major": 2,
        "version_minor": 0
       },
@@ -262,19 +262,19 @@
   {
    "cell_type": "code",
    "execution_count": 3,
-   "id": "cd4f925d",
+   "id": "c76e0164",
    "metadata": {
     "execution": {
-     "iopub.execute_input": "2026-05-19T19:45:37.456765Z",
-     "iopub.status.busy": "2026-05-19T19:45:37.456454Z",
-     "iopub.status.idle": "2026-05-19T19:52:55.539820Z",
-     "shell.execute_reply": "2026-05-19T19:52:55.538530Z"
+     "iopub.execute_input": "2026-05-19T21:00:22.149083Z",
+     "iopub.status.busy": "2026-05-19T21:00:22.148698Z",
+     "iopub.status.idle": "2026-05-19T21:09:08.898867Z",
+     "shell.execute_reply": "2026-05-19T21:09:08.897710Z"
     },
     "papermill": {
-     "duration": 438.089396,
-     "end_time": "2026-05-19T19:52:55.542109+00:00",
+     "duration": 526.756717,
+     "end_time": "2026-05-19T21:09:08.900956+00:00",
      "exception": false,
-     "start_time": "2026-05-19T19:45:37.452713+00:00",
+     "start_time": "2026-05-19T21:00:22.144239+00:00",
      "status": "completed"
     },
     "tags": []
@@ -297,8 +297,8 @@
       "Fold 2 RMSE: 354.7573\n",
       "\n",
       "--- Fold 3/5 ---\n",
-      "[250]\ttraining's rmse: 270.315\tvalid_1's rmse: 306.121\n",
-      "Fold 3 RMSE: 293.2344\n",
+      "[250]\ttraining's rmse: 270.315\tvalid_1's rmse: 306.124\n",
+      "Fold 3 RMSE: 293.2361\n",
       "\n",
       "--- Fold 4/5 ---\n",
       "[250]\ttraining's rmse: 271.288\tvalid_1's rmse: 306.453\n",
@@ -309,7 +309,7 @@
       "Fold 5 RMSE: 339.0998\n",
       "\n",
       "====================================\n",
-      "Overall Cross-Validation RMSE: 320.8026\n",
+      "Overall Cross-Validation RMSE: 320.8029\n",
       "====================================\n"
      ]
     }
@@ -401,19 +401,19 @@
   {
    "cell_type": "code",
    "execution_count": 4,
-   "id": "c37be5f7",
+   "id": "4fe576e3",
    "metadata": {
     "execution": {
-     "iopub.execute_input": "2026-05-19T19:52:55.550432Z",
-     "iopub.status.busy": "2026-05-19T19:52:55.550092Z",
-     "iopub.status.idle": "2026-05-19T19:52:55.583010Z",
-     "shell.execute_reply": "2026-05-19T19:52:55.581045Z"
+     "iopub.execute_input": "2026-05-19T21:09:08.909772Z",
+     "iopub.status.busy": "2026-05-19T21:09:08.909426Z",
+     "iopub.status.idle": "2026-05-19T21:09:08.939599Z",
+     "shell.execute_reply": "2026-05-19T21:09:08.938278Z"
     },
     "papermill": {
-     "duration": 0.039646,
-     "end_time": "2026-05-19T19:52:55.585294+00:00",
+     "duration": 0.037262,
+     "end_time": "2026-05-19T21:09:08.941772+00:00",
      "exception": false,
-     "start_time": "2026-05-19T19:52:55.545648+00:00",
+     "start_time": "2026-05-19T21:09:08.904510+00:00",
      "status": "completed"
     },
     "tags": []
@@ -482,19 +482,19 @@
   {
    "cell_type": "code",
    "execution_count": 5,
-   "id": "b09b1633",
+   "id": "04432268",
    "metadata": {
     "execution": {
-     "iopub.execute_input": "2026-05-19T19:52:55.595002Z",
-     "iopub.status.busy": "2026-05-19T19:52:55.594605Z",
-     "iopub.status.idle": "2026-05-19T20:06:56.719812Z",
-     "shell.execute_reply": "2026-05-19T20:06:56.718712Z"
+     "iopub.execute_input": "2026-05-19T21:09:08.951079Z",
+     "iopub.status.busy": "2026-05-19T21:09:08.950656Z",
+     "iopub.status.idle": "2026-05-19T21:24:13.763046Z",
+     "shell.execute_reply": "2026-05-19T21:24:13.761939Z"
     },
     "papermill": {
-     "duration": 841.132601,
-     "end_time": "2026-05-19T20:06:56.722047+00:00",
+     "duration": 904.819799,
+     "end_time": "2026-05-19T21:24:13.765199+00:00",
      "exception": false,
-     "start_time": "2026-05-19T19:52:55.589446+00:00",
+     "start_time": "2026-05-19T21:09:08.945400+00:00",
      "status": "completed"
     },
     "tags": []
@@ -651,14 +651,98 @@
   },
   {
    "cell_type": "code",
+   "execution_count": 6,
+   "id": "3bfcf183",
+   "metadata": {
+    "execution": {
+     "iopub.execute_input": "2026-05-19T21:24:13.777655Z",
+     "iopub.status.busy": "2026-05-19T21:24:13.776288Z",
+     "iopub.status.idle": "2026-05-19T21:27:50.026666Z",
+     "shell.execute_reply": "2026-05-19T21:27:50.025724Z"
+    },
+    "papermill": {
+     "duration": 216.26336,
+     "end_time": "2026-05-19T21:27:50.033551+00:00",
+     "exception": false,
+     "start_time": "2026-05-19T21:24:13.770191+00:00",
+     "status": "completed"
+    },
+    "tags": []
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Features selected for modeling (69): ['GR', 'MD_diff', 'X_diff', 'Y_diff', 'Z_diff', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31', '32', '33', '34', '35', '36', '37', '38', '39', '40', '41', '42', '43', '44', '45', '46', '47', '48', '49', '50', '51', '52', '53', '54', '55', '56', '57', '58', '59', '60', '61', '62', '63']\n",
+      "Training until validation scores don't improve for 50 rounds\n",
+      "Did not meet early stopping. Best iteration is:\n",
+      "[1000]\tvalid_0's rmse: 508.086\tvalid_0's l2: 258152\n",
+      "✅ Saved lgbm_enriched_fold_1.txt\n",
+      "Training until validation scores don't improve for 50 rounds\n",
+      "Did not meet early stopping. Best iteration is:\n",
+      "[1000]\tvalid_0's rmse: 507.87\tvalid_0's l2: 257932\n",
+      "✅ Saved lgbm_enriched_fold_2.txt\n",
+      "Training until validation scores don't improve for 50 rounds\n",
+      "Did not meet early stopping. Best iteration is:\n",
+      "[1000]\tvalid_0's rmse: 507.36\tvalid_0's l2: 257414\n",
+      "✅ Saved lgbm_enriched_fold_3.txt\n",
+      "Training until validation scores don't improve for 50 rounds\n",
+      "Did not meet early stopping. Best iteration is:\n",
+      "[1000]\tvalid_0's rmse: 507.616\tvalid_0's l2: 257674\n",
+      "✅ Saved lgbm_enriched_fold_4.txt\n",
+      "Training until validation scores don't improve for 50 rounds\n",
+      "Did not meet early stopping. Best iteration is:\n",
+      "[1000]\tvalid_0's rmse: 507.813\tvalid_0's l2: 257874\n",
+      "✅ Saved lgbm_enriched_fold_5.txt\n"
+     ]
+    }
+   ],
+   "source": [
+    "import pandas as pd\n",
+    "import lightgbm as lgb\n",
+    "from sklearn.model_selection import KFold\n",
+    "\n",
+    "# 1. Load the enriched data\n",
+    "df = pd.read_csv('/kaggle/input/notebooks/homeshwarrao/train-rogii-phase-2-1d-cnn/final_training_data.csv')\n",
+    "\n",
+    "# 2. Define Features and Target (Updated to prevent spatial overfitting)\n",
+    "target = 'TVT'\n",
+    "# Explicitly drop the coordinates and auxiliary columns we don't want the LGBM to \"memorize\"\n",
+    "drop_cols = [target, 'Well_ID', 'Geology', 'TVT_input', 'X', 'Y', 'Z', 'MD', 'ANCC', 'ASTNU', 'ASTNL', 'EGFDU', 'EGFDL', 'BUDA']\n",
+    "\n",
+    "features = [c for c in df.columns if c not in drop_cols]\n",
+    "print(f\"Features selected for modeling ({len(features)}): {features}\")\n",
+    "\n",
+    "X = df[features]\n",
+    "y = df[target]\n",
+    "\n",
+    "# 3. Train the ensemble\n",
+    "kf = KFold(n_splits=5, shuffle=True, random_state=42)\n",
+    "\n",
+    "for i, (train_idx, val_idx) in enumerate(kf.split(X, y)):\n",
+    "    X_train, X_val = X.iloc[train_idx], X.iloc[val_idx]\n",
+    "    y_train, y_val = y.iloc[train_idx], y.iloc[val_idx]\n",
+    "    \n",
+    "    model = lgb.LGBMRegressor(n_estimators=1000, learning_rate=0.05)\n",
+    "    model.fit(X_train, y_train, eval_set=[(X_val, y_val)], \n",
+    "              eval_metric='rmse', callbacks=[lgb.early_stopping(50)])\n",
+    "    \n",
+    "    # Save the NEW weights\n",
+    "    model.booster_.save_model(f'lgbm_enriched_fold_{i+1}.txt')\n",
+    "    print(f\"✅ Saved lgbm_enriched_fold_{i+1}.txt\")"
+   ]
+  },
+  {
+   "cell_type": "code",
    "execution_count": null,
-   "id": "762cd004",
+   "id": "db3e5443",
    "metadata": {
     "papermill": {
-     "duration": 0.004332,
-     "end_time": "2026-05-19T20:06:56.730417+00:00",
+     "duration": 0.004836,
+     "end_time": "2026-05-19T21:27:50.043315+00:00",
      "exception": false,
-     "start_time": "2026-05-19T20:06:56.726085+00:00",
+     "start_time": "2026-05-19T21:27:50.038479+00:00",
      "status": "completed"
     },
     "tags": []
@@ -673,8 +757,14 @@
    "dataSources": [
     {
      "databundleVersionId": 17009696,
+     "isSourceIdPinned": false,
      "sourceId": 132265,
      "sourceType": "competition"
+    },
+    {
+     "isSourceIdPinned": false,
+     "sourceId": 320691453,
+     "sourceType": "kernelVersion"
     }
    ],
    "dockerImageVersionId": 31328,
@@ -702,20 +792,79 @@
   },
   "papermill": {
    "default_parameters": {},
-   "duration": 1329.737264,
-   "end_time": "2026-05-19T20:06:58.159999+00:00",
+   "duration": 1695.352626,
+   "end_time": "2026-05-19T21:27:51.272563+00:00",
    "environment_variables": {},
    "exception": null,
    "input_path": "__notebook__.ipynb",
    "output_path": "__notebook__.ipynb",
    "parameters": {},
-   "start_time": "2026-05-19T19:44:48.422735+00:00",
+   "start_time": "2026-05-19T20:59:35.919937+00:00",
    "version": "2.7.0"
   },
   "widgets": {
    "application/vnd.jupyter.widget-state+json": {
     "state": {
-     "0453d17e36f147d9a87fde2f33283d2d": {
+     "1c69f04aede24058961c9bd3e1014c8e": {
+      "model_module": "@jupyter-widgets/controls",
+      "model_module_version": "2.0.0",
+      "model_name": "HTMLStyleModel",
+      "state": {
+       "_model_module": "@jupyter-widgets/controls",
+       "_model_module_version": "2.0.0",
+       "_model_name": "HTMLStyleModel",
+       "_view_count": null,
+       "_view_module": "@jupyter-widgets/base",
+       "_view_module_version": "2.0.0",
+       "_view_name": "StyleView",
+       "background": null,
+       "description_width": "",
+       "font_size": null,
+       "text_color": null
+      }
+     },
+     "2a068e5d6f7744ebbe0c54c49a8e7580": {
+      "model_module": "@jupyter-widgets/controls",
+      "model_module_version": "2.0.0",
+      "model_name": "HTMLModel",
+      "state": {
+       "_dom_classes": [],
+       "_model_module": "@jupyter-widgets/controls",
+       "_model_module_version": "2.0.0",
+       "_model_name": "HTMLModel",
+       "_view_count": null,
+       "_view_module": "@jupyter-widgets/controls",
+       "_view_module_version": "2.0.0",
+       "_view_name": "HTMLView",
+       "description": "",
+       "description_allow_html": false,
+       "layout": "IPY_MODEL_47769a276b8d454ba47d60940fe035d6",
+       "placeholder": "​",
+       "style": "IPY_MODEL_3b97e34bb9c84c5cb15fa1f6bdcbd18c",
+       "tabbable": null,
+       "tooltip": null,
+       "value": " 1546/1546 [00:33&lt;00:00, 54.23it/s]"
+      }
+     },
+     "3b97e34bb9c84c5cb15fa1f6bdcbd18c": {
+      "model_module": "@jupyter-widgets/controls",
+      "model_module_version": "2.0.0",
+      "model_name": "HTMLStyleModel",
+      "state": {
+       "_model_module": "@jupyter-widgets/controls",
+       "_model_module_version": "2.0.0",
+       "_model_name": "HTMLStyleModel",
+       "_view_count": null,
+       "_view_module": "@jupyter-widgets/base",
+       "_view_module_version": "2.0.0",
+       "_view_name": "StyleView",
+       "background": null,
+       "description_width": "",
+       "font_size": null,
+       "text_color": null
+      }
+     },
+     "47769a276b8d454ba47d60940fe035d6": {
       "model_module": "@jupyter-widgets/base",
       "model_module_version": "2.0.0",
       "model_name": "LayoutModel",
@@ -768,7 +917,7 @@
        "width": null
       }
      },
-     "06be5479119448ac9505ab6bdb607725": {
+     "4b120337a8ae42199fa9d196e017b04b": {
       "model_module": "@jupyter-widgets/controls",
       "model_module_version": "2.0.0",
       "model_name": "HBoxModel",
@@ -783,52 +932,16 @@
        "_view_name": "HBoxView",
        "box_style": "",
        "children": [
-        "IPY_MODEL_b6afd188afb346ef933093ac465ec215",
-        "IPY_MODEL_b21489a5d1e84994ae60bcb8d9be1e7f",
-        "IPY_MODEL_f2d7bd80022b43069013e51fe1d455af"
+        "IPY_MODEL_d8276021279c4261b762bd0291d31aef",
+        "IPY_MODEL_764e5486858b4a41baca28c69346f84f",
+        "IPY_MODEL_2a068e5d6f7744ebbe0c54c49a8e7580"
        ],
-       "layout": "IPY_MODEL_0453d17e36f147d9a87fde2f33283d2d",
+       "layout": "IPY_MODEL_ed5ba2bc149a4b4fa580081f976c6a09",
        "tabbable": null,
        "tooltip": null
       }
      },
-     "0d7b6befd15444c2a76b744696242078": {
-      "model_module": "@jupyter-widgets/controls",
-      "model_module_version": "2.0.0",
-      "model_name": "HTMLStyleModel",
-      "state": {
-       "_model_module": "@jupyter-widgets/controls",
-       "_model_module_version": "2.0.0",
-       "_model_name": "HTMLStyleModel",
-       "_view_count": null,
-       "_view_module": "@jupyter-widgets/base",
-       "_view_module_version": "2.0.0",
-       "_view_name": "StyleView",
-       "background": null,
-       "description_width": "",
-       "font_size": null,
-       "text_color": null
-      }
-     },
-     "2ad13113783e4d77bd7590714ba761f3": {
-      "model_module": "@jupyter-widgets/controls",
-      "model_module_version": "2.0.0",
-      "model_name": "HTMLStyleModel",
-      "state": {
-       "_model_module": "@jupyter-widgets/controls",
-       "_model_module_version": "2.0.0",
-       "_model_name": "HTMLStyleModel",
-       "_view_count": null,
-       "_view_module": "@jupyter-widgets/base",
-       "_view_module_version": "2.0.0",
-       "_view_name": "StyleView",
-       "background": null,
-       "description_width": "",
-       "font_size": null,
-       "text_color": null
-      }
-     },
-     "5af5eb5578df4513b49e37c6d3d21be8": {
+     "6ae1b6611fb24f0f9d55500b1e0c3f9d": {
       "model_module": "@jupyter-widgets/base",
       "model_module_version": "2.0.0",
       "model_name": "LayoutModel",
@@ -881,23 +994,7 @@
        "width": null
       }
      },
-     "ab6b1526591e40f4ad390284dcaec81c": {
-      "model_module": "@jupyter-widgets/controls",
-      "model_module_version": "2.0.0",
-      "model_name": "ProgressStyleModel",
-      "state": {
-       "_model_module": "@jupyter-widgets/controls",
-       "_model_module_version": "2.0.0",
-       "_model_name": "ProgressStyleModel",
-       "_view_count": null,
-       "_view_module": "@jupyter-widgets/base",
-       "_view_module_version": "2.0.0",
-       "_view_name": "StyleView",
-       "bar_color": null,
-       "description_width": ""
-      }
-     },
-     "b21489a5d1e84994ae60bcb8d9be1e7f": {
+     "764e5486858b4a41baca28c69346f84f": {
       "model_module": "@jupyter-widgets/controls",
       "model_module_version": "2.0.0",
       "model_name": "FloatProgressModel",
@@ -913,17 +1010,33 @@
        "bar_style": "success",
        "description": "",
        "description_allow_html": false,
-       "layout": "IPY_MODEL_f06d6a22a8b0459fad42ee4752e18bb9",
+       "layout": "IPY_MODEL_f45d8562b0824cc4b1f471327f8be642",
        "max": 1546.0,
        "min": 0.0,
        "orientation": "horizontal",
-       "style": "IPY_MODEL_ab6b1526591e40f4ad390284dcaec81c",
+       "style": "IPY_MODEL_aab9c05a9ff14cd196adb565906ff09c",
        "tabbable": null,
        "tooltip": null,
        "value": 1546.0
       }
      },
-     "b6afd188afb346ef933093ac465ec215": {
+     "aab9c05a9ff14cd196adb565906ff09c": {
+      "model_module": "@jupyter-widgets/controls",
+      "model_module_version": "2.0.0",
+      "model_name": "ProgressStyleModel",
+      "state": {
+       "_model_module": "@jupyter-widgets/controls",
+       "_model_module_version": "2.0.0",
+       "_model_name": "ProgressStyleModel",
+       "_view_count": null,
+       "_view_module": "@jupyter-widgets/base",
+       "_view_module_version": "2.0.0",
+       "_view_name": "StyleView",
+       "bar_color": null,
+       "description_width": ""
+      }
+     },
+     "d8276021279c4261b762bd0291d31aef": {
       "model_module": "@jupyter-widgets/controls",
       "model_module_version": "2.0.0",
       "model_name": "HTMLModel",
@@ -938,15 +1051,15 @@
        "_view_name": "HTMLView",
        "description": "",
        "description_allow_html": false,
-       "layout": "IPY_MODEL_e50b25739f30430bb24baca0df7b8033",
+       "layout": "IPY_MODEL_6ae1b6611fb24f0f9d55500b1e0c3f9d",
        "placeholder": "​",
-       "style": "IPY_MODEL_0d7b6befd15444c2a76b744696242078",
+       "style": "IPY_MODEL_1c69f04aede24058961c9bd3e1014c8e",
        "tabbable": null,
        "tooltip": null,
        "value": "Processing Train Data: 100%"
       }
      },
-     "e50b25739f30430bb24baca0df7b8033": {
+     "ed5ba2bc149a4b4fa580081f976c6a09": {
       "model_module": "@jupyter-widgets/base",
       "model_module_version": "2.0.0",
       "model_name": "LayoutModel",
@@ -999,7 +1112,7 @@
        "width": null
       }
      },
-     "f06d6a22a8b0459fad42ee4752e18bb9": {
+     "f45d8562b0824cc4b1f471327f8be642": {
       "model_module": "@jupyter-widgets/base",
       "model_module_version": "2.0.0",
       "model_name": "LayoutModel",
@@ -1050,29 +1163,6 @@
        "top": null,
        "visibility": null,
        "width": null
-      }
-     },
-     "f2d7bd80022b43069013e51fe1d455af": {
-      "model_module": "@jupyter-widgets/controls",
-      "model_module_version": "2.0.0",
-      "model_name": "HTMLModel",
-      "state": {
-       "_dom_classes": [],
-       "_model_module": "@jupyter-widgets/controls",
-       "_model_module_version": "2.0.0",
-       "_model_name": "HTMLModel",
-       "_view_count": null,
-       "_view_module": "@jupyter-widgets/controls",
-       "_view_module_version": "2.0.0",
-       "_view_name": "HTMLView",
-       "description": "",
-       "description_allow_html": false,
-       "layout": "IPY_MODEL_5af5eb5578df4513b49e37c6d3d21be8",
-       "placeholder": "​",
-       "style": "IPY_MODEL_2ad13113783e4d77bd7590714ba761f3",
-       "tabbable": null,
-       "tooltip": null,
-       "value": " 1546/1546 [00:36&lt;00:00, 50.70it/s]"
       }
      }
     },
