@@ -1,7 +1,8 @@
 # Trained model weights
 
-The binary artifacts in this folder are **not committed to git**. They are
-published as the Kaggle dataset:
+The trained weights are committed in this folder (everything is pickle-free
+and each file is well under GitHub's size limits). They are also published
+as the Kaggle dataset for notebook attachment:
 
 **[`homeshwarrao/rogii-lgb-weights-v1`](https://www.kaggle.com/datasets/homeshwarrao/rogii-lgb-weights-v1)**
 

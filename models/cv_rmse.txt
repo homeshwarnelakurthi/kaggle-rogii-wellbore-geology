@@ -1,0 +1,5 @@
+flat_baseline_rmse 107.4948
+oof_tvt_rmse_lgb 11.0751
+oof_tvt_rmse_cb 12.7971
+oof_tvt_rmse_ens50 11.5483
+oof_tvt_rmse_best_blend 11.0751 (w_lgb=1.00)

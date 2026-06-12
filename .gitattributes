@@ -1,0 +1,6 @@
+# model artifacts must stay byte-exact — no EOL conversion on checkout
+models/*.txt -text
+models/*.cbm binary
+models/*.npz binary
+models/*.json -text
+submission.csv -text

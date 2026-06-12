@@ -1,13 +1,8 @@
 # competition data (download via kaggle CLI)
 rogii-wellbore-geology-prediction/
 
-# large generated artifacts
+# large generated intermediates
 features_train.parquet
-submission*.csv
-
-# model binaries live in the Kaggle dataset homeshwarrao/rogii-lgb-weights-v1
-models/*
-!models/README.md
 
 # local tooling
 .claude/
