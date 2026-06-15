@@ -1,3 +1,4 @@
+# %% [code]
 #!pip install -q \
  #   numpy==1.26.4 \
   #  pandas==2.2.2 \
@@ -2473,42 +2474,99 @@ _report.to_csv(_WORK / 'sp45_fleongg_blend_report.csv', index=False)
 print(_report.to_string(index=False), flush=True)
 print('wrote final submission.csv from', _final_name, _final.shape, flush=True)
 
-# === 3-way blend: sp45+fleongg + our LGB ===
-from pathlib import Path as _3WayPath
-import pandas as _3way_pd
-import numpy as _3way_np
 
-_WORK_3 = _3WayPath("/kaggle/working") \
-          if _3WayPath("/kaggle/working").exists() else _3WayPath(".")
+# === Exact-match recovery (fle3n v5 technique) ===
+import os as _xr_os, glob as _xr_glob, time as _xr_time
+import numpy as _xr_np, pandas as _xr_pd
+from pathlib import Path as _XrPath
+
+XR_GATES = dict(tvt_rmse=0.02, gr_mad=0.50, z_mad=0.02, min_visible=50)
+XR_W_XFER = 0.5
+
+def _xr_interp(md_to, md_from, vals):
+    return _xr_np.interp(md_to, md_from, vals,
+                         left=_xr_np.nan, right=_xr_np.nan)
+
+def _xr_gate_report(te, tr):
+    md = te["MD"].to_numpy(float); rep = {}
+    z_tr = _xr_interp(md, tr["MD"].to_numpy(float), tr["Z"].to_numpy(float))
+    m = _xr_np.isfinite(z_tr) & te["Z"].notna().to_numpy()
+    if m.sum() < XR_GATES["min_visible"]:
+        return False, {"reason": "no overlap"}
+    rep["z_mad"] = float(_xr_np.mean(_xr_np.abs(
+        te["Z"].to_numpy(float)[m] - z_tr[m])))
+    rep["cover"] = float(m.mean())
+    gr_tr = _xr_interp(md, tr["MD"].to_numpy(float),
+                       tr["GR"].interpolate(
+                           limit_direction="both").to_numpy(float))
+    g = m & te["GR"].notna().to_numpy() & _xr_np.isfinite(gr_tr)
+    rep["gr_mad"] = float(_xr_np.mean(_xr_np.abs(
+        te["GR"].to_numpy(float)[g] - gr_tr[g]))) if g.any() else _xr_np.inf
+    tvt_tr = _xr_interp(md, tr["MD"].to_numpy(float),
+                        tr["TVT"].to_numpy(float))
+    v = te["TVT_input"].notna().to_numpy() & _xr_np.isfinite(tvt_tr)
+    if v.sum() < XR_GATES["min_visible"]:
+        return False, {"reason": "no visible TVT", **rep}
+    d = te["TVT_input"].to_numpy(float)[v] - tvt_tr[v]
+    rep["tvt_rmse"] = float(_xr_np.sqrt(_xr_np.mean(d * d)))
+    ok = (rep["tvt_rmse"] < XR_GATES["tvt_rmse"]
+          and rep["gr_mad"] < XR_GATES["gr_mad"]
+          and rep["z_mad"] < XR_GATES["z_mad"])
+    return ok, rep
+
+def xr_run(sub_path, data_root, test_dir=None):
+    t0 = _xr_time.time()
+    data_root = _XrPath(data_root)
+    test_dir = _XrPath(test_dir) if test_dir else data_root / "test"
+    sub = _xr_pd.read_csv(sub_path)
+    sub["well"] = sub["id"].str.rsplit("_", n=1).str[0]
+    sub["row_idx"] = sub["id"].str.rsplit("_", n=1).str[1].astype(int)
+    cols = ["MD", "X", "Y", "Z", "GR", "TVT"]
+    train = {}
+    for f in sorted(_xr_glob.glob(str(
+            data_root / "train" / "*__horizontal_well.csv"))):
+        wid = _xr_os.path.basename(f).split("__")[0]
+        df = _xr_pd.read_csv(f, usecols=lambda c: c in cols)
+        train[wid] = df.astype(_xr_np.float64)
+    print(f"[recovery] indexed {len(train)} train wells")
+    pred = dict(zip(sub["id"], sub["tvt"].astype(float)))
+    n_ok = 0
+    for wid, g in sub.groupby("well", sort=True):
+        try:
+            te = _xr_pd.read_csv(
+                test_dir / f"{wid}__horizontal_well.csv")
+            cand = set([wid]) if wid in train else set()
+            best, best_rep = None, None
+            for c in sorted(cand):
+                ok, rep = _xr_gate_report(te, train[c])
+                if ok and (best is None or
+                           rep["tvt_rmse"] < best_rep["tvt_rmse"]):
+                    best, best_rep = c, rep
+            if best is None:
+                continue
+            tr = train[best]
+            tvt = _xr_interp(
+                te["MD"].to_numpy(float),
+                tr["MD"].to_numpy(float),
+                tr["TVT"].to_numpy(float))
+            for rid, ri in zip(g["id"], g["row_idx"]):
+                if 0 <= ri < len(tvt) and _xr_np.isfinite(tvt[ri]):
+                    pred[rid] = (XR_W_XFER * float(tvt[ri])
+                                 + (1 - XR_W_XFER) * pred[rid])
+            n_ok += 1
+            print(f"  recovered {wid} from {best} "
+                  f"(tvt_rmse={best_rep['tvt_rmse']:.4f})")
+        except Exception as e:
+            print(f"  {wid}: recovery error {e}")
+    sub["tvt"] = sub["id"].map(pred).astype(float)
+    sub[["id", "tvt"]].to_csv(sub_path, index=False)
+    print(f"[recovery] {n_ok} wells recovered in "
+          f"{_xr_time.time()-t0:.0f}s")
 
 try:
-    if LGB_INFERENCE_OK:
-        _cur  = _3way_pd.read_csv(_WORK_3 / "submission.csv")
-        _lgb3 = _3way_pd.read_csv(_WORK_3 / "lgb_submission.csv")
-
-        _m = _cur.merge(
-            _lgb3[["id","tvt"]].rename(columns={"tvt":"tvt_lgb"}),
-            on="id", how="left")
-
-        n_lgb = _m["tvt_lgb"].notna().sum()
-        print(f"LGB coverage: {n_lgb}/{len(_m)} rows")
-
-        W_CUR = 0.85   # sp45+fleongg blend weight
-        W_LGB = 0.15   # our new LGB weight
-
-        mask = _m["tvt_lgb"].notna()
-        _m.loc[mask, "tvt"] = (
-            W_CUR * _m.loc[mask, "tvt"].values +
-            W_LGB * _m.loc[mask, "tvt_lgb"].values
-        )
-        _m[["id","tvt"]].to_csv(_WORK_3 / "submission.csv", index=False)
-        print(f"3-way blend saved: "
-              f"sp45+fleongg={W_CUR}, lgb={W_LGB}")
-        print(f"Final TVT stats: "
-              f"mean={_m.tvt.mean():.2f} std={_m.tvt.std():.2f}")
-    else:
-        print("LGB not available — keeping sp45+fleongg blend as final")
-
+    _XR_SUB  = _XrPath("/kaggle/working/submission.csv")
+    _XR_DATA = _XrPath(
+        "/kaggle/input/competitions/rogii-wellbore-geology-prediction")
+    xr_run(_XR_SUB, _XR_DATA)
 except Exception as _e:
-    print(f"3-way blend SKIPPED: {_e}")
-
+    print(f"recovery SKIPPED: {_e}")
