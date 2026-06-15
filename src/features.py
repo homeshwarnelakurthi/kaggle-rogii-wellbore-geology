@@ -283,11 +283,22 @@ class CtxView:
         M[:, 1, 1] += lam
         v = np.stack([(w * x1 * f).sum(1), (w * x2 * f).sum(1),
                       (w * f).sum(1)], axis=1)
+        # numpy 2.x changed batched-solve semantics for an (n,M) rhs and raises
+        # ValueError (not LinAlgError), so the old except missed it. v[..., None]
+        # makes the stacked solve unambiguous across numpy 1.x/2.x; the per-row
+        # pinv loop is the singular-matrix fallback.
         try:
-            c = np.linalg.solve(M, v)                              # (n,3)
-        except np.linalg.LinAlgError:
-            c = np.stack([np.linalg.lstsq(M[i], v[i], rcond=None)[0]
-                          for i in range(len(M))])
+            c = np.linalg.solve(M, v[..., None])[..., 0]           # (n,3)
+        except Exception:
+            c = np.zeros_like(v)
+            for i in range(len(M)):
+                try:
+                    c[i] = np.linalg.solve(M[i], v[i])
+                except Exception:
+                    try:
+                        c[i] = np.linalg.pinv(M[i]) @ v[i]
+                    except Exception:
+                        pass
         F_plane = c[:, 2]
         resid = f - (c[:, 0:1] * x1 + c[:, 1:2] * x2 + c[:, 2:3])
         fit_rms = np.sqrt((w * resid ** 2).sum(1) / Sw)

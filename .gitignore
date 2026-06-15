@@ -3,6 +3,7 @@ rogii-wellbore-geology-prediction/
 
 # large generated intermediates
 features_train.parquet
+models/oof_components.parquet
 
 # local tooling
 .claude/
